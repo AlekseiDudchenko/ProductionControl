@@ -8,9 +8,9 @@
         Height="350">
     <Grid>
         <Grid.DataContext>
-            <local:ExcelData/>
-        </Grid.DataContext> 
-        
+            <local:ExcelData />
+        </Grid.DataContext>
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="7*" />
             <ColumnDefinition Width="6*" />
@@ -95,12 +95,24 @@
                     VerticalAlignment="Bottom"
                     Click="Button_Click_1"
                     Content="Сохранить" />
+            <Label />
 
+            <Button Width="132"
+                    HorizontalAlignment="Center"
+                    Content="Расход материалов"
+                    RenderTransformOrigin="0.5,0.5" />
+            <Label />
+            <Button Width="132"
+                    HorizontalAlignment="Center"
+                    Content="Приход материалов" />
+
+            <Label />
+            <Button Width="132"          
+                VerticalAlignment="Bottom"
+                Click="Button_Click_2"
+                Content="Материалы" />
         </StackPanel>
 
-        <Button Grid.Column="1"
-                HorizontalAlignment="Right"
-                VerticalAlignment="Bottom"
-                Content="Материалы" Click="Button_Click_2" />
+
     </Grid>
 </Window>

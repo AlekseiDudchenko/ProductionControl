@@ -12,6 +12,7 @@ namespace ProductionControl
     class MainViewModel
     {
         ObservableCollection<MaterialViewModel> MaterialList { get; set; }
+        
         /*
         public MainViewModel(List<Material> materials)
         {
