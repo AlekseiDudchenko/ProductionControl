@@ -24,8 +24,8 @@ namespace ProductionControl
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             if (DataTextBox.Text == "" || SupplyTexBox.Text == "" || ReasonSupplyTexBox.Text == "" ||
-                SypplyNumberTextBox.Text == "" || ExpendTexBox.Text == "" || ExpendTexBox.Text == "" ||
-                ReasonExpendTexBox.Text == "" || ExpendNumberTexBox.Text == "")
+                DebitNumberTextBox.Text == "" || CreditTexBox.Text == "" || CreditTexBox.Text == "" ||
+                ReasonCreditTexBox.Text == "" || CreditNumberTexBox.Text == "")
             {
                 MessageBox.Show("Введены не все данные!\nВведите все данные и попробуйте снова.");
             }             
@@ -36,7 +36,7 @@ namespace ProductionControl
         }
 
 
-        private int _row;
+        private int lastrow;
 
         /// <summary>
         /// Осуществляет запись данных из формы в файл
@@ -62,34 +62,34 @@ namespace ProductionControl
                 for (column = 1; column <= range.Columns.Count; column++)
                 {
                 }
-                _row = row;
+                lastrow = row;
             }
 
             // номер первой пустой строки
-            _row ++;
+            lastrow ++;
             // заполняем заполняем ячейки файла данными
-            worksheet.Cells[_row, 1] = _row - 1;
-            worksheet.Cells[_row, 2] = DataTextBox.Text;
-            worksheet.Cells[_row, 3] = SupplyTexBox.Text;
-            worksheet.Cells[_row, 4] = ReasonSupplyTexBox.Text;
-            worksheet.Cells[_row, 5] = SypplyNumberTextBox.Text;
-            worksheet.Cells[_row, 6] = ExpendTexBox.Text;
-            worksheet.Cells[_row, 7] = ReasonExpendTexBox.Text;
-            worksheet.Cells[_row, 8] = ExpendNumberTexBox.Text;
+            worksheet.Cells[lastrow, 1] = lastrow - 1;
+            worksheet.Cells[lastrow, 2] = DataTextBox.Text;
+            worksheet.Cells[lastrow, 3] = SupplyTexBox.Text;
+            worksheet.Cells[lastrow, 4] = ReasonSupplyTexBox.Text;
+            worksheet.Cells[lastrow, 5] = DebitNumberTextBox.Text;
+            worksheet.Cells[lastrow, 6] = CreditTexBox.Text;
+            worksheet.Cells[lastrow, 7] = ReasonCreditTexBox.Text;
+            worksheet.Cells[lastrow, 8] = CreditNumberTexBox.Text;
             // в ячейку девятого столбца вводим формулу для подсчета суммы. Таким образом храним в файле не сумму, а заставляем Excel её считать самостоятельно
-            worksheet.Cells[_row, 9] = ("=C" + _row + "-F" + _row);
+            worksheet.Cells[lastrow, 9] = ("=C" + lastrow + "-F" + lastrow);
         
             // закрываем Excel
             workbook.Close(true, Missing.Value, Missing.Value);
             excelApp.Quit();
 
             // подсчитываем сумму за день из формы
-            int _summ = Convert.ToInt32(SupplyTexBox.Text) - Convert.ToInt32(ExpendTexBox.Text);
+            int _summ = Convert.ToInt32(SupplyTexBox.Text) - Convert.ToInt32(CreditTexBox.Text);
 
             // выводим сообщение на экран об успешности операции
             MessageBox.Show("Изменения сохранены.\nДата: " + DataTextBox.Text + "\nПриход: " + SupplyTexBox.Text +
-                            " по документу № " + SypplyNumberTextBox.Text + "\nРасход:  " + ExpendTexBox.Text +
-                            " по документу № " + ExpendNumberTexBox.Text + "\n\nБаланс за день: " + _summ);
+                            " по документу № " + DebitNumberTextBox.Text + "\nРасход:  " + CreditTexBox.Text +
+                            " по документу № " + CreditNumberTexBox.Text + "\n\nБаланс за день: " + _summ);
         }
 
 
@@ -104,6 +104,23 @@ namespace ProductionControl
              var Matertial =  new MaterialView();
              Matertial.ShowDialog();
         }
+
+
+        private void Button_Click_Credit(object sender, RoutedEventArgs e)
+        {
+            // открываем форму Material
+            var creditMaterial = new CreditMaterialView();
+            creditMaterial.ShowDialog();
+        }
+
+        private void Button_Click_Debit(object sender, RoutedEventArgs e)
+        {
+            // открываем форму Material
+            var debitMaterial = new DebitMaterialView();
+           debitMaterial.ShowDialog();
+        }
+
+
     }
 }
 

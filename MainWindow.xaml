@@ -61,21 +61,21 @@
                 <Label Grid.Row="4"
                        Grid.Column="0"
                        Content="Номер документа" />
-                <TextBox x:Name="SypplyNumberTextBox"
+                <TextBox x:Name="DebitNumberTextBox"
                          Grid.Row="4"
                          Grid.Column="1" />
 
                 <Label Grid.Row="5"
                        Grid.Column="0"
                        Content="Расход" />
-                <TextBox x:Name="ExpendTexBox"
+                <TextBox x:Name="CreditTexBox"
                          Grid.Row="5"
                          Grid.Column="1" />
 
                 <Label Grid.Row="6"
                        Grid.Column="0"
                        Content="Основание" />
-                <ComboBox x:Name="ReasonExpendTexBox"
+                <ComboBox x:Name="ReasonCreditTexBox"
                           Grid.Row="6"
                           Grid.Column="1">
                     <System:String>Наряд</System:String>
@@ -85,7 +85,7 @@
                 <Label Grid.Row="7"
                        Grid.Column="0"
                        Content="Номер наряда" />
-                <TextBox x:Name="ExpendNumberTexBox"
+                <TextBox x:Name="CreditNumberTexBox"
                          Grid.Row="7"
                          Grid.Column="1" />
 
@@ -99,18 +99,19 @@
 
             <Button Width="132"
                     HorizontalAlignment="Center"
-                    Content="Расход материалов"
-                    RenderTransformOrigin="0.5,0.5" />
+                    Click="Button_Click_Credit"
+                    Content="Расход материалов" />
             <Label />
             <Button Width="132"
                     HorizontalAlignment="Center"
+                    Click="Button_Click_Debit"
                     Content="Приход материалов" />
 
             <Label />
-            <Button Width="132"          
-                VerticalAlignment="Bottom"
-                Click="Button_Click_2"
-                Content="Материалы" />
+            <Button Width="132"
+                    VerticalAlignment="Bottom"
+                    Click="Button_Click_2"
+                    Content="Материалы" />
         </StackPanel>
 
 
