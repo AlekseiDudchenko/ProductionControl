@@ -1,0 +1,47 @@
+﻿<Window x:Class="CreditApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Вентсай"
+        Width="350"
+        Height="350">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="3*" />
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+
+
+        <StackPanel Grid.Column="1" VerticalAlignment="Center">
+
+            <Label Name="Datelable" />
+            <Label />
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="149*" />
+                    <ColumnDefinition Width="85*" />
+                </Grid.ColumnDefinitions>
+            </Grid>
+
+            <Label />
+            <Button Click="Button_Click_Debit_Material" Content="Приход материалов" />
+            <Label />
+            <Button Content="Расход материалов" Click="Button_Click_Debit_Material" />
+            <Label />
+            <Button Content="Приход денежных средств" Click="Button_Click_Credit_Maney" />
+            <Label />
+            <Button Content="Расход денежных средств"  Click="Button_Click_Debit_Maney"/>
+            <Label Height="30" />
+        </StackPanel>
+
+        <StackPanel Grid.Column="1" VerticalAlignment="Bottom">
+            <Button Content="Закрыть" />
+            <Label />
+        </StackPanel>
+
+
+
+
+    </Grid>
+</Window>
