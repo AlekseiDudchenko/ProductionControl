@@ -1,7 +1,7 @@
 ﻿<Window x:Class="CreditApp.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Вентсай"
+        Title="ООО Вентсай"
         Width="350"
         Height="350">
     <Grid>
@@ -10,7 +10,6 @@
             <ColumnDefinition Width="3*" />
             <ColumnDefinition Width="1*" />
         </Grid.ColumnDefinitions>
-
 
         <StackPanel Grid.Column="1" VerticalAlignment="Center">
 
@@ -27,21 +26,18 @@
             <Label />
             <Button Click="Button_Click_Debit_Material" Content="Приход материалов" />
             <Label />
-            <Button Content="Расход материалов" Click="Button_Click_Debit_Material" />
+            <Button Click="Button_Click_Credit_Material" Content="Расход материалов" />
             <Label />
-            <Button Content="Приход денежных средств" Click="Button_Click_Credit_Maney" />
+            <Button Click="Button_Click_Credit_Maney" Content="Приход денежных средств" />
             <Label />
-            <Button Content="Расход денежных средств"  Click="Button_Click_Debit_Maney"/>
+            <Button Click="Button_Click_Debit_Maney" Content="Расход денежных средств" />
             <Label Height="30" />
         </StackPanel>
 
         <StackPanel Grid.Column="1" VerticalAlignment="Bottom">
-            <Button Content="Закрыть" />
+            <Button Click="Button_Click_Exit" Content="Закрыть" />
             <Label />
         </StackPanel>
-
-
-
 
     </Grid>
 </Window>
