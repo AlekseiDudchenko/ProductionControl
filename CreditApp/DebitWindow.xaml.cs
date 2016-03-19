@@ -13,60 +13,65 @@ namespace CreditApp
     /// </summary>
     public partial class DebitWindow : Window
     {
+        //TODO что за переменная
         private int lastrow = 0; //???
+        string[] ediniciIzmerenia = new string[200];  //
+
+        // для получения адреса файла
         ExcelClass excel = new ExcelClass();
 
         public DebitWindow()
         {
             InitializeComponent();
+            // устанавливаем значение поля суммы
+            SummTextBox.Content = 0;
 
             // открываем документ и лист для считывания данных для comboBox
             Microsoft.Office.Interop.Excel.Application excelApp = new Microsoft.Office.Interop.Excel.Application();
             Workbook workbook = excelApp.Workbooks.Open(excel.Filename);
-            Worksheet worksheet = (Worksheet) workbook.Sheets["Mat"];
-
-            // заполняем comboBox значениями
-            for (int i = 3; i < 76; i++)
+            Worksheet MatWorksheet = (Worksheet) workbook.Sheets["Mat"];
+            Range MatRange = MatWorksheet.UsedRange;
+          
+            // проход по всем строкам листа Mat
+            for (int i = 3; i <= MatRange.Rows.Count; i++)
             {
-                MaterialComboBox.Items.Add(worksheet.Cells[i, 2].Value);
+                // заполняем comboBox значениями
+                MaterialComboBox.Items.Add(MatWorksheet.Cells[i, 2].Value);
+                // запоминаем единици измерения
+                ediniciIzmerenia[i - 3] = MatWorksheet.Cells[i, 3].Value;
             }
-
-            /*
-            // получем номер последнего документа в excele
-            worksheet = (Worksheet) workbook.Sheets["Приход материалов"];
-            Range range = worksheet.UsedRange;
-            DocNamberTexBox.Text = worksheet.Cells[2, 2].Value;
-            */
 
             // закрываем Excel
             workbook.Close(true, Missing.Value, Missing.Value);
             excelApp.Quit();
+
+            // заполняем текущее время
+            DatePicker.Text = DateTime.Now.ToString("dd.MM.yyyy");
         }
 
         /// <summary>
-        /// 
+        /// Кнопка добавить
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void Button_Click_Add(object sender, RoutedEventArgs e)
         {
-
             Microsoft.Office.Interop.Excel.Application excelApp = new Microsoft.Office.Interop.Excel.Application();
             Workbook workbook = excelApp.Workbooks.Open(excel.Filename);
             Worksheet debitWorksheet = (Worksheet) workbook.Sheets["Приход материалов"];
             Range debitRange = debitWorksheet.UsedRange;
             Worksheet analiticaWorksheet = workbook.Sheets["Аналитика"];
-
+            Worksheet priceDebitWorksheet = (Worksheet) workbook.Sheets["Цена прихода"];
             Worksheet creditWorksheet = workbook.Sheets["Расход материалов"];
             Range creditRange = creditWorksheet.UsedRange;
-          
+
             int column = 0;
 
             //Получаем номер последней заполненной строки
             int lastrow = debitWorksheet.UsedRange.Rows.Count;
 
-            // проверям совпадение номера документа
-            Range cellRange = (Range)debitWorksheet.Cells[lastrow - 1, 3];
+            // проверям совпадение номера документа c последней записью в строке
+            Range cellRange = (Range) debitWorksheet.Cells[lastrow - 1, 3];
             // если номер документа совпал с последней записью
             if (cellRange.Value.ToString() == DocNamberTexBox.Text)
             {
@@ -102,47 +107,100 @@ namespace CreditApp
 
                     // стираем старые формулы 
                     debitWorksheet.Cells[lastrow, column] = "";
+                    priceDebitWorksheet.Cells[lastrow, column] = "";
+
                     // формируем новую формулу
                     string formula = "=СУММ(" + letter + "3:" + letter + lastrow + ")";
-                    // записываем новую формулу суммы по столбцам в соответствующие ячейки
+
+                    // записываем новую формулу суммы по столбцам в соответствующие ячейки 
+                    // ...для Прихода материалов
                     debitWorksheet.Cells[lastrow + 1, column].FormulaLocal = formula;
+                    // ... для Цены прихода
+                    priceDebitWorksheet.Cells[lastrow + 1, column].FormulaLocal = formula;
 
                     // формируем формулу для Аналитики
                     string analitica = "='Приход материалов'!" + letter + (lastrow + 1) + "-'Расход материалов'!" +
                                        letter + creditRange.Rows.Count;
                     // записываем новую формулу в аналитику
-                    Range analiticaRange = (Range)analiticaWorksheet.Cells[5, column];
-                    analiticaRange.FormulaLocal = analitica; 
+                    Range analiticaRange = (Range) analiticaWorksheet.Cells[5, column];
+                    analiticaRange.FormulaLocal = analitica;
                 }
-
-                // заполняем заполняем ячейки файла данными
-                debitWorksheet.Cells[lastrow, 1] = lastrow - 2;
-                debitWorksheet.Cells[lastrow, 2] = DatePicker.Text;
-                debitWorksheet.Cells[lastrow, 3] = DocNamberTexBox.Text;
-                debitWorksheet.Cells[lastrow, MaterialComboBox.SelectedIndex + 4] = CreditMaterialTextBox.Text;
-
-                /*
-                // меняем формулу в аналитике
-                debitWorksheet = workbook.Sheets["Аналитика"];
-                Range cellsRange = (Range)debitWorksheet.Cells[5, 2];
-                cellsRange.Formula = "='Приход материалов'!D" + (lastrow + 1) + "-'Расход материалов'!D32";
-                */
-
-
-                // закрываем Excel
-                workbook.Close(true, Missing.Value, Missing.Value);
-                excelApp.Quit();
-
-                // выводим информационно сообщение
-                MessageBox.Show("Добавлен приход материала " + MaterialComboBox.Text + " в размере " +
-                                CreditMaterialTextBox.Text);
-
-                // обнуляем значения элементов формы
-                MaterialComboBox.SelectedIndex = -1;
-                CreditMaterialTextBox.Text = String.Empty;
             }
+
+            // заполняем ячейки файла данными из формы о ПРИХОДЕ материала 
+            debitWorksheet.Cells[lastrow, 1] = lastrow - 2;
+            debitWorksheet.Cells[lastrow, 2] = DatePicker.Text;
+            debitWorksheet.Cells[lastrow, 3] = DocNamberTexBox.Text;
+            debitWorksheet.Cells[lastrow, MaterialComboBox.SelectedIndex + 4] = CreditMaterialTextBox.Text;
+
+            // заполняем ячейки файла данными из формы о ЦЕНЕ материала               
+            priceDebitWorksheet.Cells[lastrow, 1] = lastrow - 2;
+            priceDebitWorksheet.Cells[lastrow, 2] = DatePicker.Text;
+            priceDebitWorksheet.Cells[lastrow, 3] = DocNamberTexBox.Text;
+            priceDebitWorksheet.Cells[lastrow, MaterialComboBox.SelectedIndex + 4] = PriceTextBox.Text;
+
+            // закрываем Excel
+            workbook.Close(true, Missing.Value, Missing.Value);
+            excelApp.Quit();
+
+            // выводим информационно сообщение
+            MessageBox.Show("Добавлен приход материала " + MaterialComboBox.Text + " в размере " +
+                            CreditMaterialTextBox.Text);
+
+
+            //TODO сменить имена переменных на человеческие
+            // отрезаем символы "руб" от LocalSumm.Content
+            string localSumm = Convert.ToString(LocalSumm.Content);
+            int position = localSumm.IndexOf("руб");
+            string localsumm2 = "";
+
+            for (int i = 0; i < position; i++)
+            {
+                localsumm2 += localSumm[i];
+            }
+
+            // обнуляем значения элементов формы
+            // сбросили индекс выбранного материала
+            MaterialComboBox.SelectedIndex = -1;
+            // подсчитываем введенную за все шаги сумму и показываем
+            SummTextBox.Content = Convert.ToString(Convert.ToInt32(SummTextBox.Content) + Convert.ToInt32(localsumm2));
+            // сбрасываем локальную сумму
+            LocalSumm.Content = "";
+            // сбрасываем поля для ввода количества и цены
+            CreditMaterialTextBox.Text = String.Empty;
+            PriceTextBox.Text = String.Empty;
+
         }
 
+        /// <summary>
+        /// Изменения в поле ввода цены материала
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void PriceTextBox_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        {
+            CreditMaterialTextBox_TextChanged(sender, e);
+        }
+
+        /// <summary>
+        /// Изменение в поле ввода количества материала
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CreditMaterialTextBox_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        {
+            {
+                if (CreditMaterialTextBox.Text!= "" & (PriceTextBox.Text != ""))
+                {
+                    if (Convert.ToInt32(CreditMaterialTextBox.Text) != 0 & Convert.ToInt32(PriceTextBox.Text) != 0)
+                    {
+                        LocalSumm.Content =
+                            Convert.ToString(Convert.ToInt32(CreditMaterialTextBox.Text)*
+                                             Convert.ToInt32(PriceTextBox.Text)) + "руб";
+                    }
+                }
+            } 
+        }
 
         /// <summary>
         /// Кнопка закрыть
@@ -154,5 +212,9 @@ namespace CreditApp
             this.Close();
         }
 
+        private void MaterialComboBox_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            EdiniciIzmereniaLabel.Content = ediniciIzmerenia[MaterialComboBox.SelectedIndex + 3];
+        }
     }
 }
