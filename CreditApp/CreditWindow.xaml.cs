@@ -43,18 +43,21 @@ namespace CreditApp
                 MaterialComboBox.Items.Add(worksheet.Cells[i, 2].Value);
             }
 
+
+            /*
             // получем номер последнего документа
             worksheet = (Microsoft.Office.Interop.Excel.Worksheet) workbook.Sheets["Расход материалов"];
-            Microsoft.Office.Interop.Excel.Range range = worksheet.UsedRange;
-
+            Range range = worksheet.UsedRange;
             DocNamberTexBox.Text = worksheet.Cells[2, 2].Value;
+            */
+
 
             // закрываем Excel
             workbook.Close(true, Missing.Value, Missing.Value);
             excelApp.Quit();
 
             // заполняем текущее время
-            DateTexBox.Text = DateTime.Now.ToString("dd.MM.yyyy");
+            //DateTexBox.Text = DateTime.Now.ToString("dd.MM.yyyy");
 
 
         }
@@ -78,7 +81,7 @@ namespace CreditApp
             Range cellRange = (Range)worksheet.Cells[lastrow - 1, 3];
             string cellValue = cellRange.Value.ToString();
 
-            Microsoft.Office.Interop.Excel.Worksheet worksheetAnalitica = workbook.Sheets["Аналитика"];
+            Worksheet worksheetAnalitica = workbook.Sheets["Аналитика"];
 
 
             if (cellValue == DocNamberTexBox.Text)

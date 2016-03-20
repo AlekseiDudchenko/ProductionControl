@@ -8,7 +8,8 @@ namespace CreditApp
 {
     class ExcelClass
     {
-        private string filename = "\\12.xlsx";
+        // устанавливаем адрес файла
+        private string filename = Environment.CurrentDirectory + "\\6.xlsx";
         //private string filename = "C:\\12.xlsx";
 
         public string Filename

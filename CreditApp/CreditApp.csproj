@@ -84,12 +84,30 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CreditMoneyWindow.xaml.cs">
+      <DependentUpon>CreditMoneyWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DebitMoneyWindow.xaml.cs">
+      <DependentUpon>DebitMoneyWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DebitWindow.xaml.cs">
       <DependentUpon>DebitWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="CreditWindow.xaml.cs">
       <DependentUpon>CreditWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DebitMaterial.cs" />
+    <Compile Include="NewBillWindow.xaml.cs">
+      <DependentUpon>NewBillWindow.xaml</DependentUpon>
+    </Compile>
+    <Page Include="CreditMoneyWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DebitMoneyWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -108,6 +126,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="CreditWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="NewBillWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

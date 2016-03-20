@@ -1,6 +1,4 @@
 ﻿using System;
-using System.IO;
-using System.Net.Configuration;
 using System.Reflection;
 using System.Windows;
 using Microsoft.Office.Interop.Excel;
@@ -25,6 +23,8 @@ namespace CreditApp
             InitializeComponent();
             // устанавливаем значение поля суммы
             SummTextBox.Content = 0;
+            AddButton.IsEnabled = false;
+            EdiniciIzmereniaLabel.Content = "ед.";
 
             // открываем документ и лист для считывания данных для comboBox
             Microsoft.Office.Interop.Excel.Application excelApp = new Microsoft.Office.Interop.Excel.Application();
@@ -77,6 +77,7 @@ namespace CreditApp
             {
                 // добавляем в существующую записьб еще материал
                 debitWorksheet.Cells[lastrow - 1, MaterialComboBox.SelectedIndex + 4] = CreditMaterialTextBox.Text;
+                priceDebitWorksheet.Cells[lastrow - 1, MaterialComboBox.SelectedIndex + 4] = PriceTextBox.Text;
             }
             // если номер последнего документа в excele не совпал с введенным в форме
             else
@@ -125,20 +126,21 @@ namespace CreditApp
                     Range analiticaRange = (Range) analiticaWorksheet.Cells[5, column];
                     analiticaRange.FormulaLocal = analitica;
                 }
+
+
+                // заполняем ячейки файла данными из формы о ПРИХОДЕ материала 
+                debitWorksheet.Cells[lastrow, 1] = lastrow - 2;
+                debitWorksheet.Cells[lastrow, 2] = DatePicker.Text;
+                debitWorksheet.Cells[lastrow, 3] = DocNamberTexBox.Text;
+                debitWorksheet.Cells[lastrow, MaterialComboBox.SelectedIndex + 4] = CreditMaterialTextBox.Text;
+
+                // заполняем ячейки файла данными из формы о ЦЕНЕ материала               
+                priceDebitWorksheet.Cells[lastrow, 1] = lastrow - 2;
+                priceDebitWorksheet.Cells[lastrow, 2] = DatePicker.Text;
+                priceDebitWorksheet.Cells[lastrow, 3] = DocNamberTexBox.Text;
+                priceDebitWorksheet.Cells[lastrow, MaterialComboBox.SelectedIndex + 4] = PriceTextBox.Text;
+
             }
-
-            // заполняем ячейки файла данными из формы о ПРИХОДЕ материала 
-            debitWorksheet.Cells[lastrow, 1] = lastrow - 2;
-            debitWorksheet.Cells[lastrow, 2] = DatePicker.Text;
-            debitWorksheet.Cells[lastrow, 3] = DocNamberTexBox.Text;
-            debitWorksheet.Cells[lastrow, MaterialComboBox.SelectedIndex + 4] = CreditMaterialTextBox.Text;
-
-            // заполняем ячейки файла данными из формы о ЦЕНЕ материала               
-            priceDebitWorksheet.Cells[lastrow, 1] = lastrow - 2;
-            priceDebitWorksheet.Cells[lastrow, 2] = DatePicker.Text;
-            priceDebitWorksheet.Cells[lastrow, 3] = DocNamberTexBox.Text;
-            priceDebitWorksheet.Cells[lastrow, MaterialComboBox.SelectedIndex + 4] = PriceTextBox.Text;
-
             // закрываем Excel
             workbook.Close(true, Missing.Value, Missing.Value);
             excelApp.Quit();
@@ -169,7 +171,7 @@ namespace CreditApp
             // сбрасываем поля для ввода количества и цены
             CreditMaterialTextBox.Text = String.Empty;
             PriceTextBox.Text = String.Empty;
-
+            AddButton.IsEnabled = false;
         }
 
         /// <summary>
@@ -189,17 +191,90 @@ namespace CreditApp
         /// <param name="e"></param>
         private void CreditMaterialTextBox_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
         {
+            bool flag;
+
+            // проверяем на ввод цифр
+            try
             {
-                if (CreditMaterialTextBox.Text!= "" & (PriceTextBox.Text != ""))
+                Convert.ToInt32(CreditMaterialTextBox.Text);
+                Convert.ToInt32(PriceTextBox.Text);
+                flag = true;
+            }
+            catch (FormatException)
+            {
+                flag = false;
+            }
+
+            if (CreditMaterialTextBox.Text != "" & (PriceTextBox.Text != "") & flag)
+            {
+                if (Convert.ToInt32(CreditMaterialTextBox.Text) != 0 & 
+                    Convert.ToInt32(PriceTextBox.Text) != 0 &
+                    MaterialComboBox.SelectedIndex != -1)
                 {
-                    if (Convert.ToInt32(CreditMaterialTextBox.Text) != 0 & Convert.ToInt32(PriceTextBox.Text) != 0)
-                    {
-                        LocalSumm.Content =
-                            Convert.ToString(Convert.ToInt32(CreditMaterialTextBox.Text)*
-                                             Convert.ToInt32(PriceTextBox.Text)) + "руб";
-                    }
+                    AddButton.IsEnabled = true;
                 }
-            } 
+                else // нельзя записать количество 0 или по цене 0 или не выбрав материал
+                {
+                    AddButton.IsEnabled = false;
+                }
+
+                LocalSumm.Content = Convert.ToString(Convert.ToInt32(CreditMaterialTextBox.Text) *
+                                     Convert.ToInt32(PriceTextBox.Text)) + "руб";
+            }
+            else  // нельзя записывать если не конвертируется количество и цена в числа
+            {
+                AddButton.IsEnabled = false;             
+            }
+        }
+
+
+        private void MaterialComboBox_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            EdiniciIzmereniaLabel.Content = ediniciIzmerenia[MaterialComboBox.SelectedIndex + 3];
+
+            bool flag;
+
+            // проверяем на ввод цифр
+            try
+            {
+                Convert.ToInt32(CreditMaterialTextBox.Text);
+                Convert.ToInt32(PriceTextBox.Text);
+                flag = true;
+            }
+            catch (FormatException)
+            {
+                flag = false;
+            }
+
+            if (CreditMaterialTextBox.Text != "" & (PriceTextBox.Text != "") & flag)
+            {
+                if (Convert.ToInt32(CreditMaterialTextBox.Text) != 0 &
+                    Convert.ToInt32(PriceTextBox.Text) != 0 &
+                    MaterialComboBox.SelectedIndex != -1)
+                {
+                    AddButton.IsEnabled = true;
+                }
+                else // нельзя записать количество 0 или по цене 0 или не выбрав материал
+                {
+                    AddButton.IsEnabled = false;
+                }
+
+                LocalSumm.Content = Convert.ToString(Convert.ToInt32(CreditMaterialTextBox.Text) *
+                                     Convert.ToInt32(PriceTextBox.Text)) + "руб";
+            }
+            else  // нельзя записывать если не конвертируется количество и цена в числа
+            {
+                AddButton.IsEnabled = false;
+            }
+        }
+
+        private void NewBillButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            Window newBillWindow = new NewBillWindow();
+            newBillWindow.Show();
+            this.Close();
+
+            //throw new NotImplementedException();
         }
 
         /// <summary>
@@ -210,11 +285,6 @@ namespace CreditApp
         private void Button_Click_Exit(object sender, RoutedEventArgs e)
         {
             this.Close();
-        }
-
-        private void MaterialComboBox_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
-        {
-            EdiniciIzmereniaLabel.Content = ediniciIzmerenia[MaterialComboBox.SelectedIndex + 3];
         }
     }
 }
