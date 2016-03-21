@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-c:\users\алексей дудченко\documents\visual studio 2012\Projects\CreditApp\CreditApp\obj\Debug\
+C:\Users\Алексей Дудченко\documents\visual studio 2012\Projects\CreditApp\CreditApp\obj\Debug\
 CreditApp
 none
 false
 DEBUG;TRACE
-c:\users\алексей дудченко\documents\visual studio 2012\Projects\CreditApp\CreditApp\App.xaml
-3606034087
+C:\Users\Алексей Дудченко\documents\visual studio 2012\Projects\CreditApp\CreditApp\App.xaml
+6-162791879
 
-111436401819
+171750736432
 13-468195668
-MainWindow.xaml;DebitWindow.xaml;CreditWindow.xaml;
+CreditMoneyWindow.xaml;DebitMoneyWindow.xaml;MainWindow.xaml;DebitWindow.xaml;CreditWindow.xaml;NewBillWindow.xaml;
 
 False
 

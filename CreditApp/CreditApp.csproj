@@ -87,6 +87,7 @@
     <Compile Include="CreditMoneyWindow.xaml.cs">
       <DependentUpon>CreditMoneyWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DebitMoney.cs" />
     <Compile Include="DebitMoneyWindow.xaml.cs">
       <DependentUpon>DebitMoneyWindow.xaml</DependentUpon>
     </Compile>

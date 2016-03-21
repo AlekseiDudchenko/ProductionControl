@@ -35,7 +35,7 @@ namespace CreditApp
 
             // передаем значения в новое окно
             debitWindow.DocNamberTexBox.Text = this.NomberBillTextBox.Text;
-            debitWindow.BillSummTextBox.Text = this.BillPriceTextBox.Text;
+            debitWindow.BillSummLabel.Content = this.BillPriceTextBox.Text;
 
             // закрываем текущее окно
             this.Close();
