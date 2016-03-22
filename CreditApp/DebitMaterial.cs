@@ -19,7 +19,14 @@ namespace CreditApp
         private double price;
         private int row;
         private double localsumm;
+        private string provider;
 
+
+        public string Provider
+        {
+            get { return provider; }
+            set { provider = value; }
+        }
 
         /// <summary>
         /// Номер документа
@@ -93,11 +100,19 @@ namespace CreditApp
             set { row = value; }
         }
 
+        /// <summary>
+        /// Сумма прзиции
+        /// </summary>
         public double LocalSumm
         {
             get { return localsumm; }
             set { localsumm = value; }
         }
+
+        /// <summary>
+        /// Единици измерения материала
+        /// </summary>
+        public string Edinici { get; set; }
 
 
 

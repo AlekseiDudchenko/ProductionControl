@@ -1,16 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace CreditApp
 {
@@ -22,6 +12,8 @@ namespace CreditApp
         public NewBillWindow()
         {
             InitializeComponent();
+            // возможность вносить самостоятельно новые значения поставщика
+            //ProviderNameComboBox.IsEditable = true;
 
             // блокируем кнопку
             CreateNewBillButton.IsEnabled = false;
@@ -30,12 +22,13 @@ namespace CreditApp
         private void CreateNewBill(object sender, RoutedEventArgs e)
         {
 
-            DebitWindow debitWindow = new DebitWindow();
+            DebitMaterialWindow debitWindow = new DebitMaterialWindow();
             debitWindow.Show();
 
             // передаем значения в новое окно
-            debitWindow.DocNamberTexBox.Text = this.NomberBillTextBox.Text;
+            debitWindow.DocNamberTexBox.Content = this.NomberBillTextBox.Text;
             debitWindow.BillSummLabel.Content = this.BillPriceTextBox.Text;
+            debitWindow.ProviderNameLabel.Content = this.ProviderNameComboBox.SelectedItem.ToString();
 
             // закрываем текущее окно
             this.Close();
@@ -44,7 +37,18 @@ namespace CreditApp
 
         private void BillPriceTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (NomberBillTextBox.Text != "" & BillPriceTextBox.Text != "")
+            bool convertToDouble = false;
+            try
+            {
+                Convert.ToDouble(BillPriceTextBox.Text);
+                convertToDouble = true;
+            }
+            catch (Exception)
+            {
+                CreateNewBillButton.IsEnabled = false;
+                //throw;
+            }
+            if (NomberBillTextBox.Text != "" & BillPriceTextBox.Text != "" & convertToDouble)
             {
                 CreateNewBillButton.IsEnabled = true;
             }
@@ -56,14 +60,7 @@ namespace CreditApp
 
         private void NomberBillTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (NomberBillTextBox.Text != "" & BillPriceTextBox.Text != "")
-            {
-                CreateNewBillButton.IsEnabled = true;
-            }
-            else
-            {
-                CreateNewBillButton.IsEnabled = false;
-            }
+            BillPriceTextBox_TextChanged(sender, e);
         }
     }
 }

@@ -10,10 +10,6 @@ c:\users\алексей дудченко\documents\visual studio 2012\Projects\C
 c:\users\алексей дудченко\documents\visual studio 2012\Projects\CreditApp\CreditApp\obj\Debug\CreditApp.csproj.GenerateResource.Cache
 c:\users\алексей дудченко\documents\visual studio 2012\Projects\CreditApp\CreditApp\obj\Debug\CreditApp.exe
 c:\users\алексей дудченко\documents\visual studio 2012\Projects\CreditApp\CreditApp\obj\Debug\CreditApp.pdb
-c:\users\алексей дудченко\documents\visual studio 2012\Projects\CreditApp\CreditApp\obj\Debug\DebitWindow.baml
-c:\users\алексей дудченко\documents\visual studio 2012\Projects\CreditApp\CreditApp\obj\Debug\CreditWindow.baml
-c:\users\алексей дудченко\documents\visual studio 2012\Projects\CreditApp\CreditApp\obj\Debug\DebitWindow.g.cs
-c:\users\алексей дудченко\documents\visual studio 2012\Projects\CreditApp\CreditApp\obj\Debug\CreditWindow.g.cs
 C:\Users\Алексей Дудченко\Documents\Visual Studio 2012\Projects\CreditApp\CreditApp\bin\Debug\CreditApp.exe.manifest
 C:\Users\Алексей Дудченко\Documents\Visual Studio 2012\Projects\CreditApp\CreditApp\bin\Debug\CreditApp.application
 C:\Users\Алексей Дудченко\Documents\Visual Studio 2012\Projects\CreditApp\CreditApp\obj\Debug\CreditApp.exe.manifest
@@ -21,7 +17,9 @@ C:\Users\Алексей Дудченко\Documents\Visual Studio 2012\Projects\C
 C:\Users\Алексей Дудченко\documents\visual studio 2012\Projects\CreditApp\CreditApp\obj\Debug\NewBillWindow.baml
 C:\Users\Алексей Дудченко\documents\visual studio 2012\Projects\CreditApp\CreditApp\obj\Debug\NewBillWindow.g.cs
 C:\Users\Алексей Дудченко\documents\visual studio 2012\Projects\CreditApp\CreditApp\obj\Debug\CreditApp.csprojResolveAssemblyReference.cache
-C:\Users\Алексей Дудченко\documents\visual studio 2012\Projects\CreditApp\CreditApp\obj\Debug\DebitMoneyWindow.baml
-C:\Users\Алексей Дудченко\documents\visual studio 2012\Projects\CreditApp\CreditApp\obj\Debug\DebitMoneyWindow.g.cs
-C:\Users\Алексей Дудченко\documents\visual studio 2012\Projects\CreditApp\CreditApp\obj\Debug\CreditMoneyWindow.baml
-C:\Users\Алексей Дудченко\documents\visual studio 2012\Projects\CreditApp\CreditApp\obj\Debug\CreditMoneyWindow.g.cs
+C:\Users\Алексей Дудченко\documents\visual studio 2012\Projects\CreditApp\CreditApp\obj\Debug\MoveMoneyWindow.baml
+C:\Users\Алексей Дудченко\documents\visual studio 2012\Projects\CreditApp\CreditApp\obj\Debug\DebitMaterialWindow.baml
+C:\Users\Алексей Дудченко\documents\visual studio 2012\Projects\CreditApp\CreditApp\obj\Debug\MoveMoneyWindow.g.cs
+C:\Users\Алексей Дудченко\documents\visual studio 2012\Projects\CreditApp\CreditApp\obj\Debug\DebitMaterialWindow.g.cs
+C:\Users\Алексей Дудченко\documents\visual studio 2012\Projects\CreditApp\CreditApp\obj\Debug\CreditMaterialWindow.baml
+C:\Users\Алексей Дудченко\documents\visual studio 2012\Projects\CreditApp\CreditApp\obj\Debug\CreditMaterialWindow.g.cs

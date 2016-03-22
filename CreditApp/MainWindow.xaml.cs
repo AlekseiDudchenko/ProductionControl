@@ -15,9 +15,9 @@ namespace CreditApp
     /// Логика взаимодействия для MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
-    {
+    {      
         ExcelClass excel = new ExcelClass();
-
+        
         public MainWindow()
         {
             // проверяем наличие файла
@@ -36,26 +36,22 @@ namespace CreditApp
         }
 
         private void Button_Click_Debit_Material(object sender, RoutedEventArgs e)
-        {         
-                Window newBillWindow = new NewBillWindow();
-                newBillWindow.ShowDialog();          
+        {
+            Window newBillWindow = new NewBillWindow();
+            newBillWindow.ShowDialog();
         }
 
         private void Button_Click_Credit_Material(object sender, RoutedEventArgs e)
-        {       
-                Window creditWindow = new CreditWindow();
-                creditWindow.Show();           
+        {
+            Window creditWindow = new CreditMaterialWindow();
+            creditWindow.Show();
         }
 
-        private void Button_Click_Credit_Maney(object sender, RoutedEventArgs e)
-        {
-            Window creditMoneyWindow = new CreditMoneyWindow();
-            creditMoneyWindow.Show();                       
-        }
+
 
         private void Button_Click_Debit_Maney(object sender, RoutedEventArgs e)
         {
-            Window debitmoneyWindow = new DebitMoneyWindow();
+            Window debitmoneyWindow = new MoveMoneyWindow();
             debitmoneyWindow.Show();
         }
 

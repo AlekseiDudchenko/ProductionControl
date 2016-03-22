@@ -14,7 +14,7 @@
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>C:\Users\Алексей Дудченко\Dropbox\Движение средств Цеха\WebSite\</PublishUrl>
+    <PublishUrl>C:\Users\Алексей Дудченко\Dropbox\Движение средств Цеха\VentSayApp2\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -24,7 +24,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>2</ApplicationRevision>
+    <ApplicationRevision>4</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -84,28 +84,22 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="CreditMoneyWindow.xaml.cs">
-      <DependentUpon>CreditMoneyWindow.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="CreditMaterial.cs" />
     <Compile Include="DebitMoney.cs" />
-    <Compile Include="DebitMoneyWindow.xaml.cs">
-      <DependentUpon>DebitMoneyWindow.xaml</DependentUpon>
+    <Compile Include="MoveMoneyWindow.xaml.cs">
+      <DependentUpon>MoveMoneyWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="DebitWindow.xaml.cs">
-      <DependentUpon>DebitWindow.xaml</DependentUpon>
+    <Compile Include="DebitMaterialWindow.xaml.cs">
+      <DependentUpon>DebitMaterialWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CreditWindow.xaml.cs">
-      <DependentUpon>CreditWindow.xaml</DependentUpon>
+    <Compile Include="CreditMaterialWindow.xaml.cs">
+      <DependentUpon>CreditMaterialWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="DebitMaterial.cs" />
     <Compile Include="NewBillWindow.xaml.cs">
       <DependentUpon>NewBillWindow.xaml</DependentUpon>
     </Compile>
-    <Page Include="CreditMoneyWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="DebitMoneyWindow.xaml">
+    <Page Include="MoveMoneyWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -122,11 +116,11 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="DebitWindow.xaml">
+    <Page Include="DebitMaterialWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="CreditWindow.xaml">
+    <Page Include="CreditMaterialWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

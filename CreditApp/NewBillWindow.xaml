@@ -1,6 +1,7 @@
 ﻿<Window x:Class="CreditApp.NewBillWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:System="clr-namespace:System;assembly=mscorlib"
         Title="Новыя счёт-фактура"
         Width="350"
         Height="300">
@@ -22,15 +23,29 @@
                     <ColumnDefinition Width="10*" />
                 </Grid.ColumnDefinitions>
                 <Label Content="Номер счёт-фактуры:" />
-                <TextBox Name="NomberBillTextBox" Grid.Column="1" TextChanged="NomberBillTextBox_TextChanged" />
+                <TextBox x:Name="NomberBillTextBox"
+                         Grid.Column="1"
+                         TextChanged="NomberBillTextBox_TextChanged" />
             </Grid>
 
+            <Label Content="Поставщик" />
+            <ComboBox x:Name="ProviderNameComboBox">
+                <System:String>МеталПрофиль</System:String>
+                <System:String>СибМеталНефтеГазаДобычаПромМонтаж</System:String>
+                <System:String>Другой Поставщик</System:String>
+            </ComboBox>
+
+
             <Label Content="Общая стоимость счёт-фактуры" />
-            <TextBox Name="BillPriceTextBox"
+            <TextBox x:Name="BillPriceTextBox"
                      Height="25"
-                     Text="" TextChanged="BillPriceTextBox_TextChanged" />
+                     Text=""
+                     TextChanged="BillPriceTextBox_TextChanged" />
             <Label />
-            <Button Name="CreateNewBillButton" Click="CreateNewBill" Content="Внести данные" />
+            <Button x:Name="CreateNewBillButton"
+                    Click="CreateNewBill"
+                    Content="Внести данные"
+                    IsDefault="True" />
 
         </StackPanel>
 

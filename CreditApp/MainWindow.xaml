@@ -4,8 +4,12 @@
         Title="ООО Вентсай"
         Width="350"
         Height="350">
-   
-    <Grid >
+
+
+
+
+
+    <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*" />
             <ColumnDefinition Width="3*" />
@@ -15,32 +19,24 @@
         <StackPanel Grid.Column="1" VerticalAlignment="Center">
 
             <Label Name="Datelable" />
-            <Label />
-
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="149*" />
-                    <ColumnDefinition Width="85*" />
-                </Grid.ColumnDefinitions>
-            </Grid>
 
             <Label Content="Офис" />
             <Button Click="Button_Click_Debit_Material" Content="Приход материалов" />
             <Label />
-            <Button Click="Button_Click_Credit_Material"
-                    Content="Расход материалов"/>
+            <Button Click="Button_Click_Credit_Material" Content="Расход материалов" />
 
             <Label Content="Цех" />
             <Button Click="Button_Click_Debit_Maney" Content="Движение денежных средств" />
             <Label />
-            <Button Visibility="Hidden" Click="Button_Click_Credit_Maney"
+            <Button 
                     Content="Расход денежных средств"
-                    IsEnabled="False" />
-            <Label Height="30" /> 
+                    IsEnabled="False"
+                    Visibility="Hidden" />
+            <Label Height="30" />
         </StackPanel>
 
         <StackPanel Grid.Column="1" VerticalAlignment="Bottom">
-            <Button Click="Button_Click_Exit" Content="Закрыть" />
+            <Button Click="Button_Click_Exit" Content="Закрыть" IsCancel="True" />
             <Label />
         </StackPanel>
 
