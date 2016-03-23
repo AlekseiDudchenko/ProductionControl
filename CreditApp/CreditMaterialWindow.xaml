@@ -22,7 +22,8 @@
                 <Label Content="Наряд №" />
                 <TextBox Name="DocNamberTexBox"
                          Grid.Row="0"
-                         Grid.Column="1" TextChanged="DocNamberTexBox_TextChanged" />
+                         Grid.Column="1"
+                         TextChanged="DocNamberTexBox_TextChanged" />
             </Grid>
 
             <Grid>
@@ -47,8 +48,7 @@
                     <ColumnDefinition Width="149*" />
                     <ColumnDefinition Width="85*" />
                 </Grid.ColumnDefinitions>
-                <TextBox Name="CreditMaterialTextBox"
-                         TextChanged="CreditMaterialTextBox_TextChanged" />
+                <TextBox Name="CreditMaterialTextBox" TextChanged="CreditMaterialTextBox_TextChanged" />
                 <Label Name="EdiniciIzmereniaLabel"
                        Grid.Column="1"
                        Content="ед." />
@@ -82,10 +82,10 @@
                                         Binding="{Binding MaterialName}"
                                         Header="Материал" />
                     <DataGridTextColumn Width="Auto"
-                                        Binding="{Binding  Credit}"
+                                        Binding="{Binding Credit}"
                                         Header="Кол-во" />
                     <DataGridTextColumn Width="Auto"
-                                        Binding="{Binding  Edinici}"
+                                        Binding="{Binding Edinici}"
                                         Header="ед." />
                 </DataGrid.Columns>
             </DataGrid>

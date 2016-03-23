@@ -124,7 +124,7 @@
         </StackPanel>
 
         <StackPanel Grid.Column="2">
-            <DataGrid Name="DataGrid"
+            <DataGrid Name="MyDataGrid"
                       AutoGenerateColumns="False"
                       CanUserAddRows="False"
                       CanUserDeleteRows="False"

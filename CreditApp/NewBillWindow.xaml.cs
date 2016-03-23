@@ -12,8 +12,6 @@ namespace CreditApp
         public NewBillWindow()
         {
             InitializeComponent();
-            // возможность вносить самостоятельно новые значения поставщика
-            //ProviderNameComboBox.IsEditable = true;
 
             // блокируем кнопку
             CreateNewBillButton.IsEnabled = false;
@@ -21,14 +19,13 @@ namespace CreditApp
 
         private void CreateNewBill(object sender, RoutedEventArgs e)
         {
-
             DebitMaterialWindow debitWindow = new DebitMaterialWindow();
             debitWindow.Show();
 
             // передаем значения в новое окно
-            debitWindow.DocNamberTexBox.Content = this.NomberBillTextBox.Text;
-            debitWindow.BillSummLabel.Content = this.BillPriceTextBox.Text;
-            debitWindow.ProviderNameLabel.Content = this.ProviderNameComboBox.SelectedItem.ToString();
+            debitWindow.DocNamberTexBox.Content = NomberBillTextBox.Text;
+            debitWindow.BillSummLabel.Content = BillPriceTextBox.Text;
+            debitWindow.ProviderNameLabel.Content = ProviderNameComboBox.SelectedItem.ToString();
 
             // закрываем текущее окно
             this.Close();

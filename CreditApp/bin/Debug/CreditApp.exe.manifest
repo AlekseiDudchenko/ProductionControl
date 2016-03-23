@@ -42,14 +42,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="CreditApp.exe" size="50688">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="CreditApp.exe" size="51200">
       <assemblyIdentity name="CreditApp" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>LUFKE95VzPmwmWkgoEUMJbDNsbveLSp9ARNgAYlovvw=</dsig:DigestValue>
+        <dsig:DigestValue>sseA6x0iuAkBBNYjyhbQHl9h/Z3Wcj/7UiISpUQQXHE=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

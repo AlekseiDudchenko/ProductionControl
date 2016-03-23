@@ -11,11 +11,17 @@ namespace CreditApp
     class ExcelClass
     {
         // устанавливаем адрес файла
-        //private string filename = Environment.CurrentDirectory + "\\7.xlsx";
-        private string filename = "C:\\12.xlsx";
+        private string filename = Environment.CurrentDirectory + "\\7.xlsx";
+        //private string filename = "C:\\12.xlsx";
      
-        // массив для хранения индексов материалов и наименования материалов
+        /// <summary>
+        /// Единичи измерения материалов
+        /// </summary>
         public string[] EdiniciIzmerenia = new string[200];
+
+        /// <summary>
+        /// Список наименований материалов
+        /// </summary>
         public string[] MaterialsNames = new string[200];
 
         /// <summary>
