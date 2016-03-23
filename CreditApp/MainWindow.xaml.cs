@@ -60,5 +60,19 @@ namespace CreditApp
             this.Close();
         }
 
+        private void AddNewMaterial_Click(object sender, RoutedEventArgs e)
+        {
+            Window addNewMaterialWindow = new AddNewMaterialWindow();
+            addNewMaterialWindow.ShowDialog();
+        }
+
+        private void AddNewProvider_Click(object sender, RoutedEventArgs e)
+        {
+            Window addNewProviderWindow = new AddNewProviderWindow();
+            addNewProviderWindow.ShowDialog();
+        }
+
+
+
     }
 }

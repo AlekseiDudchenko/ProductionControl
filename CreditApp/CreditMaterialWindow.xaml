@@ -3,11 +3,13 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Вентсай. Расход материалов"
         Width="555"
-        Height="350">
+        Height="350"
+        MinHeight="310">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="10" />
             <ColumnDefinition Width="190" />
+            <ColumnDefinition Width="10" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
@@ -49,7 +51,7 @@
                     <ColumnDefinition Width="85*" />
                 </Grid.ColumnDefinitions>
                 <TextBox Name="CreditMaterialTextBox" TextChanged="CreditMaterialTextBox_TextChanged" />
-                <Label Name="EdiniciIzmereniaLabel"
+                <Label Name="UnitsLabel"
                        Grid.Column="1"
                        Content="ед." />
             </Grid>
@@ -72,7 +74,7 @@
 
         </StackPanel>
 
-        <StackPanel Grid.Column="2">
+        <Grid Grid.Column="3">
             <DataGrid Name="DataGrid"
                       AutoGenerateColumns="False"
                       CanUserAddRows="False"
@@ -89,6 +91,6 @@
                                         Header="ед." />
                 </DataGrid.Columns>
             </DataGrid>
-        </StackPanel>
+        </Grid>
     </Grid>
 </Window>

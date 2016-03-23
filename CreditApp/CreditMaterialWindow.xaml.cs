@@ -47,7 +47,7 @@ namespace CreditApp
                 MaterialName = MaterialComboBox.Text,
                 MaterialIndex = MaterialComboBox.SelectedIndex,
                 Credit = Convert.ToInt32(CreditMaterialTextBox.Text),
-                Edinici = excel.EdiniciIzmerenia[MaterialComboBox.SelectedIndex]
+                Units = excel.Units[MaterialComboBox.SelectedIndex]
             };
 
             // добавляем в коллекцию и в DataGrid
@@ -85,7 +85,7 @@ namespace CreditApp
         private void MaterialComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {            
             if (MaterialComboBox.SelectedIndex != -1)
-                EdiniciIzmereniaLabel.Content = excel.EdiniciIzmerenia[MaterialComboBox.SelectedIndex];
+                UnitsLabel.Content = excel.Units[MaterialComboBox.SelectedIndex];
 
             AddButton.IsEnabled = Functions.ProverkaDannih(CreditMaterialTextBox, DocNamberTexBox, MaterialComboBox);
         }

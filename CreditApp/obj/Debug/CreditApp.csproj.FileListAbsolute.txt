@@ -23,3 +23,7 @@ C:\Users\Алексей Дудченко\documents\visual studio 2012\Projects\C
 C:\Users\Алексей Дудченко\documents\visual studio 2012\Projects\CreditApp\CreditApp\obj\Debug\DebitMaterialWindow.g.cs
 C:\Users\Алексей Дудченко\documents\visual studio 2012\Projects\CreditApp\CreditApp\obj\Debug\CreditMaterialWindow.baml
 C:\Users\Алексей Дудченко\documents\visual studio 2012\Projects\CreditApp\CreditApp\obj\Debug\CreditMaterialWindow.g.cs
+C:\Users\Алексей Дудченко\documents\visual studio 2012\Projects\CreditApp\CreditApp\obj\Debug\AddNewMaterialWindow.baml
+C:\Users\Алексей Дудченко\documents\visual studio 2012\Projects\CreditApp\CreditApp\obj\Debug\AddNewMaterialWindow.g.cs
+C:\Users\Алексей Дудченко\documents\visual studio 2012\Projects\CreditApp\CreditApp\obj\Debug\AddNewProviderWindow.baml
+C:\Users\Алексей Дудченко\documents\visual studio 2012\Projects\CreditApp\CreditApp\obj\Debug\AddNewProviderWindow.g.cs

@@ -52,7 +52,7 @@ namespace CreditApp
                 Row = debitMaterialsCollection.Count + 1
             };
             newDebitMaterial.LocalSumm = newDebitMaterial.Debit*newDebitMaterial.Price;
-            newDebitMaterial.Edinici = excel.EdiniciIzmerenia[newDebitMaterial.MaterialIndex];
+            newDebitMaterial.Edinici = excel.Units[newDebitMaterial.MaterialIndex];
 
             // добавляем в коллекцию и отображаем в MyDataGrid
             debitMaterialsCollection.Add(newDebitMaterial);
@@ -220,7 +220,7 @@ namespace CreditApp
 
             // показываем единицы измерения соответствующие выбранному материалу
             // если не равно -1 то присвоить значение, иначе пустую строку          
-            EdiniciIzmereniaLabel.Content = MaterialComboBox.SelectedIndex != -1 ? excel.EdiniciIzmerenia[MaterialComboBox.SelectedIndex] : "";
+            EdiniciIzmereniaLabel.Content = MaterialComboBox.SelectedIndex != -1 ? excel.Units[MaterialComboBox.SelectedIndex] : "";
         }
 #endregion
   

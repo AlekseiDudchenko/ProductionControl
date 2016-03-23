@@ -3,7 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="ООО Вентсай"
         Width="350"
-        Height="350">
+        Height="350"
+        MinHeight="340"
+        MinWidth="250">
 
 
 
@@ -24,19 +26,21 @@
             <Button Click="Button_Click_Debit_Material" Content="Приход материалов" />
             <Label />
             <Button Click="Button_Click_Credit_Material" Content="Расход материалов" />
-
+            
             <Label Content="Цех" />
             <Button Click="Button_Click_Debit_Maney" Content="Движение денежных средств" />
+            <Label Height="35"></Label>
+            <Label Content="Добавить" />
+            <Button Name="AddNewMaterial" Content="Новый материал" Click="AddNewMaterial_Click" />
             <Label />
-            <Button 
-                    Content="Расход денежных средств"
-                    IsEnabled="False"
-                    Visibility="Hidden" />
-            <Label Height="30" />
+            <Button Name="AddNewProvider" Content="Новый поставщик" Click="AddNewProvider_Click" />
+            <Label Height="20" />
         </StackPanel>
 
         <StackPanel Grid.Column="1" VerticalAlignment="Bottom">
-            <Button Click="Button_Click_Exit" Content="Закрыть" IsCancel="True" />
+            <Button Click="Button_Click_Exit"
+                    Content="Закрыть"
+                    IsCancel="True" />
             <Label />
         </StackPanel>
 

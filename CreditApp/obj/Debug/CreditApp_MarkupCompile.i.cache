@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\Алексей Дудченко\documents\visual studio 2012\Projects\CreditApp\CreditApp\App.xaml
-5-1549044741
+7-373307704
 
-18-1234121848
+21435190604
 13-468195668
-MoveMoneyWindow.xaml;MainWindow.xaml;DebitMaterialWindow.xaml;CreditMaterialWindow.xaml;NewBillWindow.xaml;
+AddNewMaterialWindow.xaml;AddNewProviderWindow.xaml;MoveMoneyWindow.xaml;MainWindow.xaml;DebitMaterialWindow.xaml;CreditMaterialWindow.xaml;NewBillWindow.xaml;
 
 False
 

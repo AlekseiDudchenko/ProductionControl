@@ -41,7 +41,7 @@ namespace CreditApp
         /// </summary>
         public double Credit { get { return _creditMaterial; } set { _creditMaterial = value; } }
 
-        public string Edinici { get; set; }
+        public string Units { get; set; }
 
     }
 }

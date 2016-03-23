@@ -3,13 +3,16 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:System="clr-namespace:System;assembly=mscorlib"
         Title="Вентсай. Приход денег"
-        Width="580"
-        Height="450">
+        Width="600"
+        Height="450"
+        MinHeight="420"
+        MinWidth="550">
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="15" />
             <ColumnDefinition Width="185" />
+            <ColumnDefinition Width="10" />
             <ColumnDefinition Width="15*" />
         </Grid.ColumnDefinitions>
 
@@ -66,7 +69,6 @@
             <ComboBox x:Name="MoveMoneyComboBox"
                       Grid.Column="0"
                       VerticalAlignment="Top"
-                      
                       SelectionChanged="MoveMoneyComboBox_SelectionChanged" />
             <Label Content="Сумма" />
 
@@ -101,7 +103,9 @@
             <Button x:Name="AddButton"
                     Click="AddButton_Click"
                     Content="Добавить"
-                    IsDefault="True" />
+                    IsDefault="True"
+                    IsEnabled="False" />
+
             <Label />
             <Button x:Name="SaveButton"
                     Click="SaveButton_Click"
@@ -113,14 +117,17 @@
                     Content="Закрыть"
                     IsCancel="True" />
             <Label />
+            
+            
         </StackPanel>
 
-
-        <StackPanel Grid.Column="2">
+        <Grid Grid.Column="3">
+            
             <DataGrid Name="DataGrid"
                       AutoGenerateColumns="False"
                       CanUserAddRows="False"
-                      CanUserDeleteRows="False">
+                      CanUserDeleteRows="True"
+                      SelectedCellsChanged="DataGrid_SelectedCellsChanged">
                 <DataGrid.Columns>
                     <DataGridTextColumn Width="Auto"
                                         Binding="{Binding TypeMove}"
@@ -139,6 +146,6 @@
                                         Header="Основание" />
                 </DataGrid.Columns>
             </DataGrid>
-        </StackPanel>
+        </Grid>
     </Grid>
 </Window>

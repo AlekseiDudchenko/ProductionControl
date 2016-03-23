@@ -17,27 +17,15 @@ namespace CreditApp
         // для получения адреса файла
         ExcelClass excel = new ExcelClass();
  
-
-        /// <summary>
-        /// Переменная для подсчета количества записей в массиве = количество нажатий на кнопку Добавить
-        /// </summary>
-        private int _numberClickButton;
-
         public MoveMoneyWindow()
         {
             InitializeComponent();
-            
-            // блокируем кнопку Добавить при загрузке формы
-            AddButton.IsEnabled = false;
-   
+
             // заполняем текущее время
             DatePicker.Text = DateTime.Now.ToString("dd.MM.yyyy");
-
-            // обнуляем счетчик количества нажатй на кнопку дабавть
-            //_numberClickButton = 0;
         }
 
-        ObservableCollection<DebitMoney> MoveMoneyCollection = new ObservableCollection<DebitMoney>();
+        ObservableCollection<DebitMoney> moveMoneyCollection = new ObservableCollection<DebitMoney>();
        
         /// <summary>
         ///  Нажатие кнопки ДОБАВИТЬ
@@ -46,41 +34,37 @@ namespace CreditApp
         /// <param name="e"></param>
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
-            DebitMoney newMoveMoney = new DebitMoney();
-
-            // заполняем экземпляр ПРИХОД ДЕНЕГ
-            newMoveMoney.Data = DatePicker.Text;
-            newMoveMoney.DocumentNumber = DocNamberTexBox.Text;
-            newMoveMoney.Statia = MoveMoneyComboBox.Text;
-            newMoveMoney.StatialIndex = MoveMoneyComboBox.SelectedIndex;
-            newMoveMoney.Debit = Convert.ToDouble(DebitMoneyTextBox.Text);
-            newMoveMoney.TypeMove = MoveComboBox.Text;
-            newMoveMoney.TypeMoveIndex = MoveComboBox.SelectedIndex;
-            newMoveMoney.Osnovanie = OsnovanieTextBox.Text;
+            // создаем экземпляр и заполняем поля
+            DebitMoney newMoveMoney = new DebitMoney
+            {
+                Data = DatePicker.Text,
+                DocumentNumber = DocNamberTexBox.Text,
+                Statia = MoveMoneyComboBox.Text,
+                StatialIndex = MoveMoneyComboBox.SelectedIndex,
+                Debit = Convert.ToDouble(DebitMoneyTextBox.Text),
+                TypeMove = MoveComboBox.Text,
+                TypeMoveIndex = MoveComboBox.SelectedIndex,
+                Osnovanie = OsnovanieTextBox.Text
+            };
 
             // вносим экземпляр в коллекцию
-            MoveMoneyCollection.Add(newMoveMoney);
-
-            DataGrid.ItemsSource = MoveMoneyCollection;
+            moveMoneyCollection.Add(newMoveMoney);
+            DataGrid.ItemsSource = moveMoneyCollection;
             DataGrid.Items.Refresh();
-            
-            // считаем нажатие на кнопку
-            //_numberClickButton += 1;
-            
+       
             // сбрасываем значения контролов
             MoveComboBox.SelectedIndex = -1;
-            DocNamberTexBox.Text = "";
-            DebitMoneyTextBox.Text = "";
-            OsnovanieTextBox.Text = "";
+            DocNamberTexBox.Text = DebitMoneyTextBox.Text = OsnovanieTextBox.Text = String.Empty;
 
-            SaveButton.IsEnabled = true;
-
+            // если DataGrid не пустой - разблокировать кнопку Сохранить
+            SaveButton.IsEnabled = (DataGrid.Items != null);
         }
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
             Microsoft.Office.Interop.Excel.Application excelApp = new Microsoft.Office.Interop.Excel.Application();
             Workbook workbook = excelApp.Workbooks.Open(excel.Filename);
+
             Worksheet debitMoneyWorksheet = (Worksheet) workbook.Sheets["Приход ДС"];
             Range debitMoneyRange = debitMoneyWorksheet.UsedRange;
 
@@ -90,41 +74,34 @@ namespace CreditApp
             debitMoneyWorksheet.Cells[lastRow, 7] = "";
 
             // записываем в таблицу
-            for (int i = 0; i < MoveMoneyCollection.Count; i++)
+            for (int i = 0; i < moveMoneyCollection.Count; i++)
             {
                 debitMoneyWorksheet.Cells[lastRow + i , 1] = lastRow + i;
-                debitMoneyWorksheet.Cells[lastRow + i , 2] = MoveMoneyCollection[i].Data;
-                debitMoneyWorksheet.Cells[lastRow + i , 3] = MoveMoneyCollection[i].TypeMove;
-                debitMoneyWorksheet.Cells[lastRow + i , 4] = MoveMoneyCollection[i].DocumentNumber;
-                debitMoneyWorksheet.Cells[lastRow + i , 5] = MoveMoneyCollection[i].Statia;
-                if (MoveMoneyCollection[i].TypeMoveIndex == 0)
-                    debitMoneyWorksheet.Cells[lastRow + i , 6] = MoveMoneyCollection[i].Debit;
-                if (MoveMoneyCollection[i].TypeMoveIndex == 1)
-                    debitMoneyWorksheet.Cells[lastRow + i , 7] = MoveMoneyCollection[i].Debit;
-                debitMoneyWorksheet.Cells[lastRow + i , 8] = MoveMoneyCollection[i].Osnovanie;                
+                debitMoneyWorksheet.Cells[lastRow + i , 2] = moveMoneyCollection[i].Data;
+                debitMoneyWorksheet.Cells[lastRow + i , 3] = moveMoneyCollection[i].TypeMove;
+                debitMoneyWorksheet.Cells[lastRow + i , 4] = moveMoneyCollection[i].DocumentNumber;
+                debitMoneyWorksheet.Cells[lastRow + i , 5] = moveMoneyCollection[i].Statia;
+                if (moveMoneyCollection[i].TypeMoveIndex == 0)
+                    debitMoneyWorksheet.Cells[lastRow + i , 6] = moveMoneyCollection[i].Debit;
+                if (moveMoneyCollection[i].TypeMoveIndex == 1)
+                    debitMoneyWorksheet.Cells[lastRow + i , 7] = moveMoneyCollection[i].Debit;
+                debitMoneyWorksheet.Cells[lastRow + i , 8] = moveMoneyCollection[i].Osnovanie;                
             }
 
-            debitMoneyWorksheet.Cells[lastRow + DataGrid.Items.Count, 6].FormulaLocal = ("=СУММ(F" + ((int) lastRow +
-                                                                                                      (int)
-                                                                                                          DataGrid.Items
-                                                                                                              .Count - 1) +
-                                                                                         ":F2)");
-            debitMoneyWorksheet.Cells[lastRow + DataGrid.Items.Count, 7].FormulaLocal = ("=СУММ(G" +
-                                                                                         ((int) lastRow +
-                                                                                          (int) DataGrid.Items.Count - 1) +
-                                                                                         ":G2)");
+            // записываем формулы суммы
+            debitMoneyWorksheet.Cells[lastRow + DataGrid.Items.Count, 6].FormulaLocal = ("=СУММ(F" + (lastRow + DataGrid.Items.Count - 1) + ":F2)");
+            debitMoneyWorksheet.Cells[lastRow + DataGrid.Items.Count, 7].FormulaLocal = ("=СУММ(G" + lastRow + (DataGrid.Items.Count - 1) + ":G2)");
 
             // закрываем Excel
             workbook.Close(true, Missing.Value, Missing.Value);
             excelApp.Quit();
 
+            // TODO проверять успешность сохранения
             MessageBox.Show("Данные успешно внесены в базу!");
             this.Close();           
         }
 
 
-        private List<string> DocumentNames = new List<string>();
-        public string DocumentName;
 
         /// <summary>
         /// Выбор в ComboBox Тип движения
@@ -134,7 +111,7 @@ namespace CreditApp
         /// <param name="e"></param>
         private void MoveComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {           
-            // Очищаем текущую коллекцию
+            // очищаем текущую коллекцию
             MoveMoneyComboBox.Items.Clear();
             // добавляем значения в зависимости от выбранного значения
             switch (MoveComboBox.SelectedIndex)
@@ -161,15 +138,8 @@ namespace CreditApp
 
 
         /// <summary>
-        /// Кнопка закрыть
+        /// Возможно будем использовать если окажется что номер документа может быть не только числовой
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void Button_Click_Exit(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
-
         private void ProverkaDannih()
         {
             // проверка на корректность данных
@@ -204,29 +174,46 @@ namespace CreditApp
 
         private void DebitMoneyTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-           ProverkaDannih();
+            AddButton.IsEnabled = Functions.ProverkaDannih(DocNamberTexBox, DebitMoneyTextBox, MoveMoneyComboBox);
         }
 
         private void DocNamberTexBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            ProverkaDannih();
+            AddButton.IsEnabled = Functions.ProverkaDannih(DocNamberTexBox, DebitMoneyTextBox, MoveMoneyComboBox);
         }
 
         private void MoveMoneyComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            ProverkaDannih();
+            // меняем названия документоd в зависимости от выбранной статьи расхода
+            string documentName = "Документ №";
             if (MoveMoneyComboBox.SelectedValue != null)
             {
-                DocumentName = "Документ №";
                 if (MoveMoneyComboBox.SelectedValue.ToString() == "Аванс")
-                    DocumentName = "Наряд №";
+                    documentName = "Наряд №";
                 if (MoveMoneyComboBox.SelectedValue.ToString() == "Оплата услуг")
-                    DocumentName = "Чек №";
+                    documentName = "Чек №";
                 if (MoveMoneyComboBox.SelectedValue.ToString() == "Полная оплата заказа")
-                    DocumentName = "Чек №";
+                    documentName = "Чек №";
             }
+            DocumentNameLabel.Content = documentName;
 
-            DocumentNameLabel.Content = DocumentName;
+            // упраялем доступностью кнопки добавить
+            AddButton.IsEnabled = Functions.ProverkaDannih(DocNamberTexBox, DebitMoneyTextBox, MoveMoneyComboBox);
+        }
+
+        /// <summary>
+        /// Кнопка закрыть
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Button_Click_Exit(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void DataGrid_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
+        {
+            SaveButton.IsEnabled = (DataGrid.Items != null);
         }
     }
 }

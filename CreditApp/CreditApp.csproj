@@ -84,9 +84,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AddNewMaterialWindow.xaml.cs">
+      <DependentUpon>AddNewMaterialWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AddNewProviderWindow.xaml.cs">
+      <DependentUpon>AddNewProviderWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CreditMaterial.cs" />
     <Compile Include="DebitMoney.cs" />
     <Compile Include="Functions.cs" />
+    <Compile Include="Material.cs" />
     <Compile Include="MoveMoneyWindow.xaml.cs">
       <DependentUpon>MoveMoneyWindow.xaml</DependentUpon>
     </Compile>
@@ -100,6 +107,14 @@
     <Compile Include="NewBillWindow.xaml.cs">
       <DependentUpon>NewBillWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="AddNewMaterialWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AddNewProviderWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MoveMoneyWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

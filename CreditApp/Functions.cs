@@ -67,6 +67,22 @@ namespace CreditApp
             return result;
         }
 
+        /// <summary>
+        /// Проверяет введены ли данные верно. 
+        /// Значения текстбоксов должны конвертироваться в double и отличаться от 0, 
+        /// Элемент в comboBox должен быть не пустым и должен быть выбран
+        /// Возвращает true если данные введены верно
+        /// </summary>
+        /// <param name="textBox1"></param>
+        /// <param name="textBox2"></param>
+        /// <param name="comboBox"></param>
+        /// <returns></returns>
+        public static bool ProverkaDannih(TextBox textBox1, TextBox textBox2, TextBox textBox3)
+        {          
+            bool result = textBox1.Text != "" & textBox2.Text != "" & textBox3.Text != "";
+            return result;
+        }
+
 
         /// <summary>
         /// Отрезает символы "Руб" от Label.Content

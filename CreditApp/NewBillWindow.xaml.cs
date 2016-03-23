@@ -12,6 +12,13 @@ namespace CreditApp
         public NewBillWindow()
         {
             InitializeComponent();
+            
+            ExcelClass ecxel = new ExcelClass();
+
+
+            ecxel.GetProviders();
+
+            ProviderNameComboBox.ItemsSource = ecxel.Providers;
 
             // блокируем кнопку
             CreateNewBillButton.IsEnabled = false;
